@@ -38,8 +38,8 @@ export async function createProject(options) {
     };
 
     const templateDir = path.resolve(
-        new URL(import.meta.url).pathname,
-        '../../template'
+        __dirname,
+        '../template'
     );
     options.templateDirectory = templateDir;
 
