@@ -1,7 +1,7 @@
 import arg from 'arg';
 import inquirer from 'inquirer';
 import { createProject } from "./main";
-import {camelToDashCase} from "./utils/stringUtils";
+import { camelToDashCase } from "./utils/stringUtils";
 
 function parseArgumentsIntoOptions(rawArgs) {
     const args = arg(
