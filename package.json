@@ -7,6 +7,11 @@
     "@quicazan/ghast-cli": "bin/ghast-cli",
     "ghast-cli": "bin/ghast-cli"
   },
+  "files": [
+    "bin/",
+    "src/",
+    "templates/"
+  ],
   "publishConfig": {
     "access": "public"
   },
