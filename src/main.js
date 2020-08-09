@@ -5,7 +5,6 @@ import path from 'path';
 import { promisify } from 'util';
 import execa from 'execa';
 import Listr from 'listr';
-import { projectInstall } from 'pkg-install';
 
 const access = promisify(fs.access);
 const copy = promisify(ncp);
@@ -28,23 +27,22 @@ async function initGit(options) {
     if (result.failed) {
         return Promise.reject(new Error('Failed to initialize git'));
     }
-    return;
 }
 
 export async function createProject(options) {
     options = {
         ...options,
-        targetDirectory: options.targetDirectory || process.cwd()
+        targetDirectory: options.targetDirectory
     };
 
-    const templateDir = path.resolve(
+    const projectTemplateDir = path.resolve(
         __dirname,
-        '../template'
+        '../template/project-template'
     );
-    options.templateDirectory = templateDir;
+    options.templateDirectory = projectTemplateDir;
 
     try {
-        await access(templateDir, fs.constants.R_OK);
+        await access(projectTemplateDir, fs.constants.R_OK);
     } catch (err) {
         console.error('%s ' + err, chalk.red.bold('ERROR'));
         console.error('%s Invalid template name', chalk.red.bold('ERROR'));
@@ -64,18 +62,7 @@ export async function createProject(options) {
             title: 'Initialize git',
             task: () => initGit(options),
             enabled: () => options.git,
-        },
-        // {
-        //     title: 'Install dependencies',
-        //     task: () =>
-        //         projectInstall({
-        //             cwd: options.targetDirectory,
-        //         }),
-        //     skip: () =>
-        //         !options.runInstall
-        //             ? 'Pass --install to automatically install dependencies'
-        //             : undefined,
-        // },
+        }
     ]);
 
     await tasks.run();
