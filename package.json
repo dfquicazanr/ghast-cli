@@ -1,6 +1,6 @@
 {
   "name": "@quicazan/ghast-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -10,7 +10,7 @@
   "files": [
     "bin/",
     "src/",
-    "templates/"
+    "template/"
   ],
   "publishConfig": {
     "access": "public"
